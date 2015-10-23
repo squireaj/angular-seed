@@ -1,16 +1,25 @@
 'use strict';
 
-describe('myApp.view1 module', function() {
 
-  beforeEach(module('myApp.view1'));
+describe('View1Ctrl', function(){
+	beforeEach(module('myApp'));
+	var scope;
+	beforeEach(inject(function($rootScope, $controller){
+		scope = $rootScope.$new();
+		$controller('View1Ctrl', {
+			$scope: scope
+		});
+	}));
 
-  describe('view1 controller', function(){
+	it('the starting day of the week should be Friday', function(){
+		expect(scope.dayOfTheWeek).toBe("Friday")
+	});
 
-    it('should ....', inject(function($controller) {
-      //spec body
-      var view1Ctrl = $controller('View1Ctrl');
-      expect(view1Ctrl).toBeDefined();
-    }));
+	it('Days in a Month', function(){
+		expect(scope.daysInAMonth('January')).toBe(31)
+		expect(scope.daysInAMonth('january')).toBe(31)
+		expect(scope.daysInAMonth('February')).toBe(28)
+		expect(scope.daysInAMonth('february')).toBe(28)
+	}) 
 
-  });
 });
